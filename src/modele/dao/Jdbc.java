@@ -10,8 +10,8 @@ import java.sql.*;
  */
 public class Jdbc {
 
-    // Instance du singleton Jdbc
     private static Jdbc singleton = null;
+
     // Paramètre de la connexion
     private String piloteJdbc = "";
     private String protocoleJdbc = "";
@@ -21,6 +21,19 @@ public class Jdbc {
     private String mdpSgbd = "";
     // Connexion
     private Connection connexion = null; // java.sql.Connection
+
+    public static Jdbc getInstance() {
+        return singleton;
+    }
+
+    public void getConnexion2() {
+        try {
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Connection connexion = DriverManager.getConnection("jdbc:oracle:thin:@localhost:XE", "BTSSIO", "btssio");
+        } catch (Exception ex) {
+            System.out.println("échec de connexion");
+        }
+    }
 
     private Jdbc() {
     }
@@ -50,9 +63,6 @@ public class Jdbc {
         return singleton;
     }
 
-    public static Jdbc getInstance() {
-        return singleton;
-    }
 
     public void connecter() throws ClassNotFoundException, SQLException {
         Class.forName(this.getPiloteJdbc());
