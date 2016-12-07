@@ -21,14 +21,18 @@ public class Visiteur {
     private String SEC_CODE;
     private String LAB_CODE;
 
-    /**
-     * Constructeur avec les 4 attributs
-     *
-     * @param id : identifiant BDD de l'adresse
-     * @param rue
-     * @param cp
-     * @param ville
-     */
+/**
+ * 
+ * @param matricule
+ * @param nom
+ * @param prenom
+ * @param adresse
+ * @param cp
+ * @param ville
+ * @param dateembauche
+ * @param section
+ * @param labo 
+ */
     public Visiteur(String matricule, String nom, String prenom, String adresse, String cp, String ville, Date dateembauche, String section, String labo) {
         this.VIS_MATRICULE = matricule;
         this.VIS_NOM = nom;
@@ -40,19 +44,31 @@ public class Visiteur {
         this.SEC_CODE = section;
         this.LAB_CODE = labo;
     }
-
+    /**
+     * 
+     * @return 
+     */
     public String getMatricule() {
         return VIS_MATRICULE;
     }
-
+/**
+ * 
+ * @param VIS_MATRICULE 
+ */
     public void setMatricule(String VIS_MATRICULE) {
         this.VIS_MATRICULE = VIS_MATRICULE;
     }
-
+/**
+ * 
+ * @return 
+ */
     public String getNom() {
         return VIS_NOM;
     }
-
+/**
+ * 
+ * @param VIS_NOM 
+ */
     public void setNom(String VIS_NOM) {
         this.VIS_NOM = VIS_NOM;
     }

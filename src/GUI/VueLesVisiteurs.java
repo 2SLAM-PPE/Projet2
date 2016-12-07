@@ -5,16 +5,20 @@
  */
 package GUI;
 
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JTextField;
+
 /**
  *
  * @author btssio
  */
-public class Visiteur extends javax.swing.JFrame {
+public class VueLesVisiteurs extends javax.swing.JFrame {
 
     /**
      * Creates new form Visiteur
      */
-    public Visiteur() {
+    public VueLesVisiteurs() {
         initComponents();
     }
 
@@ -240,22 +244,119 @@ public class Visiteur extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Visiteur.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VueLesVisiteurs.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Visiteur.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VueLesVisiteurs.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Visiteur.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VueLesVisiteurs.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Visiteur.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VueLesVisiteurs.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Visiteur().setVisible(true);
+                new VueLesVisiteurs().setVisible(true);
             }
         });
+    }
+
+    public JButton getjButtonVisiteurFermer() {
+        return jButtonVisiteurFermer;
+    }
+
+    public void setjButtonVisiteurFermer(JButton jButtonVisiteurFermer) {
+        this.jButtonVisiteurFermer = jButtonVisiteurFermer;
+    }
+
+    public JButton getjButtonVisiteurOk() {
+        return jButtonVisiteurOk;
+    }
+
+    public void setjButtonVisiteurOk(JButton jButtonVisiteurOk) {
+        this.jButtonVisiteurOk = jButtonVisiteurOk;
+    }
+
+    public JButton getjButtonVisiteurPrecedent() {
+        return jButtonVisiteurPrecedent;
+    }
+
+    public void setjButtonVisiteurPrecedent(JButton jButtonVisiteurPrecedent) {
+        this.jButtonVisiteurPrecedent = jButtonVisiteurPrecedent;
+    }
+
+    public JButton getjButtonVisiteurSuivant() {
+        return jButtonVisiteurSuivant;
+    }
+
+    public void setjButtonVisiteurSuivant(JButton jButtonVisiteurSuivant) {
+        this.jButtonVisiteurSuivant = jButtonVisiteurSuivant;
+    }
+
+    public JComboBox getjComboBoxVisiteurChercher() {
+        return jComboBoxVisiteurChercher;
+    }
+
+    public void setjComboBoxVisiteurChercher(JComboBox jComboBoxVisiteurChercher) {
+        this.jComboBoxVisiteurChercher = jComboBoxVisiteurChercher;
+    }
+
+    public JComboBox getjComboBoxVisiteurLabo() {
+        return jComboBoxVisiteurLabo;
+    }
+
+    public void setjComboBoxVisiteurLabo(JComboBox jComboBoxVisiteurLabo) {
+        this.jComboBoxVisiteurLabo = jComboBoxVisiteurLabo;
+    }
+
+    public JComboBox getjComboBoxVisiteurSecteur() {
+        return jComboBoxVisiteurSecteur;
+    }
+
+    public void setjComboBoxVisiteurSecteur(JComboBox jComboBoxVisiteurSecteur) {
+        this.jComboBoxVisiteurSecteur = jComboBoxVisiteurSecteur;
+    }
+
+    public JTextField getjTextFieldVisiteurAdresse() {
+        return jTextFieldVisiteurAdresse;
+    }
+
+    public void setjTextFieldVisiteurAdresse(JTextField jTextFieldVisiteurAdresse) {
+        this.jTextFieldVisiteurAdresse = jTextFieldVisiteurAdresse;
+    }
+
+    public JTextField getjTextFieldVisiteurCP() {
+        return jTextFieldVisiteurCP;
+    }
+
+    public void setjTextFieldVisiteurCP(JTextField jTextFieldVisiteurCP) {
+        this.jTextFieldVisiteurCP = jTextFieldVisiteurCP;
+    }
+
+    public JTextField getjTextFieldVisiteurNom() {
+        return jTextFieldVisiteurNom;
+    }
+
+    public void setjTextFieldVisiteurNom(JTextField jTextFieldVisiteurNom) {
+        this.jTextFieldVisiteurNom = jTextFieldVisiteurNom;
+    }
+
+    public JTextField getjTextFieldVisiteurPrenom() {
+        return jTextFieldVisiteurPrenom;
+    }
+
+    public void setjTextFieldVisiteurPrenom(JTextField jTextFieldVisiteurPrenom) {
+        this.jTextFieldVisiteurPrenom = jTextFieldVisiteurPrenom;
+    }
+
+    public JTextField getjTextFieldVisiteurVille() {
+        return jTextFieldVisiteurVille;
+    }
+
+    public void setjTextFieldVisiteurVille(JTextField jTextFieldVisiteurVille) {
+        this.jTextFieldVisiteurVille = jTextFieldVisiteurVille;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
