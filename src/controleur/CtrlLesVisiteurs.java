@@ -7,7 +7,6 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.sql.SQLException;
 import java.util.List;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import modele.dao.DaoVisiteur;
 import modele.metier.Visiteur;
@@ -38,7 +37,10 @@ public class CtrlLesVisiteurs implements WindowListener, ActionListener {
         this.vue.getjButtonVisiteurSuivant().addActionListener(this);
         this.vue.getjButtonVisiteurPrecedent().addActionListener(this);
         // préparer l'état iniitial de la vue
-        this.vue.getjComboBoxVisiteurChercher().setModel(new DefaultComboBoxModel(lesVisiteurs.toArray()));
+          for(Visiteur vst:lesVisiteurs){
+              String nomPrenom = vst.getNom() + " " + vst.getPrenom();
+              this.vue.getjComboBoxVisiteurChercher().addItem(nomPrenom);
+          } 
         rechercherPremier();
     }
 
@@ -131,7 +133,7 @@ public class CtrlLesVisiteurs implements WindowListener, ActionListener {
             }
             afficherUnVisiteur(lesVisiteurs, 1);
         } else if (e.getSource().equals(vue.getjButtonVisiteurPrecedent())) {
-            
+
             List<Visiteur> lesVisiteurs = null;
             try {
                 lesVisiteurs = DaoVisiteur.selectAll();
@@ -148,7 +150,7 @@ public class CtrlLesVisiteurs implements WindowListener, ActionListener {
                 JOptionPane.showMessageDialog(getVue(), "CtrlLesVisiteurs - échec de sélection des visiteurs");
             }
             afficherUnVisiteur(lesVisiteurs, (this.vue.getjComboBoxVisiteurChercher().getSelectedIndex()));
-            
+
         } else if (e.getSource().equals(vue.getjButtonVisiteurFermer())) {
             int rep = JOptionPane.showConfirmDialog(null, "Quitter l'application\nÊtes-vous sûr(e) ?", "GSB", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (rep == JOptionPane.YES_OPTION) {
