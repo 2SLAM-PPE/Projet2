@@ -74,11 +74,13 @@ public class VueLesVisiteurs extends javax.swing.JFrame {
 
         jLabelVisiteurSecteur.setText("SECTEUR");
 
-        jComboBoxVisiteurSecteur.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxVisiteurSecteur.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxVisiteurSecteurActionPerformed(evt);
+            }
+        });
 
         jLabelVisiteurLabo.setText("LABO");
-
-        jComboBoxVisiteurLabo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jButtonVisiteurPrecedent.setText("PRECEDENT");
 
@@ -224,6 +226,10 @@ public class VueLesVisiteurs extends javax.swing.JFrame {
     private void jButtonVisiteurFermerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVisiteurFermerActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonVisiteurFermerActionPerformed
+
+    private void jComboBoxVisiteurSecteurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxVisiteurSecteurActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxVisiteurSecteurActionPerformed
 
     /**
      * @param args the command line arguments
