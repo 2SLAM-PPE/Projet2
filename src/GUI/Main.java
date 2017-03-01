@@ -5,6 +5,10 @@
  */
 package GUI;
 
+import modele.dao.Jdbc;
+import controleur.*;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
 /**
  *
  * @author btssio
@@ -17,6 +21,36 @@ public class Main extends javax.swing.JFrame {
     public Main() {
         initComponents();
     }
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+//        Jdbc.creer("oracle.jdbc.driver.OracleDriver", "jdbc:oracle:thin:", "@localhost:1521:XE", "", "btssio", "btssio");
+        Jdbc.creer("oracle.jdbc.driver.OracleDriver", "jdbc:oracle:thin:", "@localhost:1521:XE", "", "ppe", "ppe");
+        try {
+            Jdbc.getInstance().connecter();
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, "Main - classe non trouvée");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Main - échec de connexion");
+        }
+        
+        CtrlPrincipal leControleurPrincipal = new CtrlPrincipal();
+        
+        VueLesVisiteurs laVueLesVisiteurs = new VueLesVisiteurs();
+        CtrlLesVisiteurs leControleurLesVisiteurs = new CtrlLesVisiteurs(laVueLesVisiteurs, leControleurPrincipal);
+        leControleurPrincipal.setCtrlLesVisiteurs(leControleurLesVisiteurs);
+        
+        //VueLesPraticiens laVueLesPraticiens = new VueLesPraticiens();
+        //CtrlLesPraticiens  leControleurLesPraticiens = new CtrlLesPraticiens(laVueLesPraticiens, leControleurPrincipal);
+        //leControleurPrincipal.setCtrlLesPraticiens(leControleurLesPraticiens);
+
+        // afficher la vue
+        laVueLesVisiteurs.setVisible(true);
+
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -167,37 +201,37 @@ public class Main extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Main().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new Main().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

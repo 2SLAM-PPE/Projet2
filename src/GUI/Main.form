@@ -168,11 +168,6 @@
       </SubComponents>
     </Container>
     <Component class="javax.swing.JLabel" name="jLabel2">
-      <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="/media/sf_PARTAGE/PPE/GSB/GSBProject/src/GUI/gsb.png"/>
-        </Property>
-      </Properties>
     </Component>
   </SubComponents>
 </Form>

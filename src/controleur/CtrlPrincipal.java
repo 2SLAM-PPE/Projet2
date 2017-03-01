@@ -8,12 +8,12 @@ public class CtrlPrincipal {
     //CtrlLesClients ctrlLesClients;
 
     public void afficherLesVisiteurs() {
-        this.ctrlLesPra.getVue().setVisible(false);
+    //    this.ctrlLesPraticiens.getVue().setVisible(false);
         this.ctrlLesVisiteurs.getVue().setVisible(true);
     }
 
-    public void afficherLesClients() {
-        this.ctrlLesClients.getVue().setVisible(true);
+    public void afficherLesPraticiens() {
+    //    this.ctrlLesPraticiens.getVue().setVisible(true);
         this.ctrlLesVisiteurs.getVue().setVisible(false);
     }
 
@@ -26,21 +26,15 @@ public class CtrlPrincipal {
         }
     }
 
-    public CtrlLesAdresses getCtrlLesAdresses() {
-        return ctrlLesAdresses;
+    public CtrlLesVisiteurs getCtrlLesVisiteurs() {
+        return ctrlLesVisiteurs;
     }
 
-    public void setCtrlLesAdresses(CtrlLesAdresses ctrlLesAdresses) {
-        this.ctrlLesAdresses = ctrlLesAdresses;
+    public void setCtrlLesVisiteurs(CtrlLesVisiteurs ctrlLesVisiteurs) {
+        this.ctrlLesVisiteurs = ctrlLesVisiteurs;
     }
 
-    public CtrlLesClients getCtrlLesClients() {
-        return ctrlLesClients;
-    }
-
-    public void setCtrlLesClients(CtrlLesClients ctrlLesClients) {
-        this.ctrlLesClients = ctrlLesClients;
-    }
+   
     
     
 
