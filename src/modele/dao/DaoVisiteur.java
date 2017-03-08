@@ -12,6 +12,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import static modele.dao.DaoLabo.*;
+import static modele.dao.DaoSecteur.*;
+import modele.metier.Labo;
+import modele.metier.Secteur;
 
 /**
  *
@@ -43,8 +47,8 @@ public class DaoVisiteur {
             String cp = rs.getString("VIS_CP");
             String ville = rs.getString("VIS_VILLE");
             Date dateEmbauche = rs.getDate("VIS_DATEEMBAUCHE");
-            String codeSec = rs.getString("SEC_CODE");
-            String codeLab = rs.getString("LAB_CODE");
+            Secteur codeSec = selectSecByCode(rs.getString("SEC_CODE"));
+            Labo codeLab = selectLabByCode(rs.getString("LAB_CODE"));
             unVisiteur = new Visiteur(matricule, nom, prenom, adresse, cp, ville, dateEmbauche, codeSec, codeLab);
         }
         return unVisiteur;
@@ -67,8 +71,8 @@ public class DaoVisiteur {
             String cp = rs.getString("VIS_CP");
             String ville = rs.getString("VIS_VILLE");
             Date dateEmbauche = rs.getDate("VIS_DATEEMBAUCHE");
-            String codeSec = rs.getString("SEC_CODE");
-            String codeLab = rs.getString("LAB_CODE");
+            Secteur codeSec = selectSecByCode(rs.getString("SEC_CODE"));
+            Labo codeLab = selectLabByCode(rs.getString("LAB_CODE"));
             unVisiteur = new Visiteur(matricule, nom, prenom, adresse, cp, ville, dateEmbauche, codeSec, codeLab);
             lesVisiteurs.add(unVisiteur);
         }

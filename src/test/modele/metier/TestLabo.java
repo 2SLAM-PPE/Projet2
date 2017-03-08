@@ -13,7 +13,7 @@ import modele.metier.Secteur;
  *
  * @author btssio
  */
-public class TestVisiteur {
+public class TestLabo {
 
     public static void main(String[] args) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -27,7 +27,7 @@ public class TestVisiteur {
             sec = new Secteur( "NW","Nord Ouest");
             vis = new Visiteur("a17", "Andre", "David", "1 r Aimon de Chissée", "38100", "Grenoble", sdf.parse("15/04/20014"), sec, lab);
         } catch (ParseException ex) {
-            Logger.getLogger(TestVisiteur.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TestLabo.class.getName()).log(Level.SEVERE, null, ex);
         }
         System.out.println(vis);
         System.out.println("\nTest n°2 : mutateurs");

@@ -26,7 +26,7 @@ public class DaoSecteur {
      * @return objet Adresse
      * @throws SQLException
      */
-    public static String selectNomByCode(String codeSecteur) throws SQLException {
+    public static String selectNomSecByCode(String codeSecteur) throws SQLException {
         String nomSecteur = null;
         ResultSet rs;
         PreparedStatement pstmt;
@@ -40,31 +40,23 @@ public class DaoSecteur {
         }
         return nomSecteur;
     }
-//    public static Secteur selectOne(String visMatricule) throws SQLException {
-//        Visiteur unVisiteur = null;
-//        ResultSet rs;
-//        PreparedStatement pstmt;
-//        Jdbc jdbc = Jdbc.getInstance();
-//        // préparer la requête
-//        String requete = "SELECT * FROM VISITEUR WHERE VIS_MATRICULE= ?";
-//        pstmt = jdbc.getConnexion().prepareStatement(requete);
-//        pstmt.setString(1, visMatricule);
-//        rs = pstmt.executeQuery();
-//        if (rs.next()) {
-//            String matricule = rs.getString("VIS_MATRICULE");
-//            String nom = rs.getString("VIS_NOM");
-//            String prenom = rs.getString("VIS_PRENOM");
-//            String adresse = rs.getString("VIS_ADRESSE");
-//            String cp = rs.getString("VIS_CP");
-//            String ville = rs.getString("VIS_VILLE");
-//            Date dateEmbauche = rs.getDate("VIS_DATEEMBAUCHE");
-//            String codeSec = rs.getString("SEC_CODE");
-//            String codeLab = rs.getString("LAB_CODE");
-//            unVisiteur = new Visiteur(matricule, nom, prenom, adresse, cp, ville, dateEmbauche, codeSec, codeLab);
-//        }
-//        return unVisiteur;
-//    }
-
+    public static Secteur selectSecByCode(String codeLab) throws SQLException {
+        Secteur unSecteur = null;
+        ResultSet rs;
+        PreparedStatement pstmt;
+        Jdbc jdbc = Jdbc.getInstance();
+        // préparer la requête
+        String requete = "SELECT * FROM SECTEUR WHERE SEC_CODE= ?";
+        pstmt = jdbc.getConnexion().prepareStatement(requete);
+        pstmt.setString(1, codeLab);
+        rs = pstmt.executeQuery();
+        if (rs.next()) {
+            String code = rs.getString("SEC_CODE");
+            String libelle = rs.getString("SEC_LIBELLE");
+            unSecteur = new Secteur(code, libelle);
+        }
+        return unSecteur;
+    }
     public static List<Secteur> selectAll() throws SQLException {
         List<Secteur> lesSecteurs = new ArrayList<Secteur>();
         Secteur unSecteur;
