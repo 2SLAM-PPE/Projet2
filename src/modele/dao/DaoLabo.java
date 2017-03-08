@@ -19,27 +19,27 @@ import java.util.List;
  */
 public class DaoLabo {
 
-    /**
-     * Extraction d'une adresse, sur son identifiant
-     *
-     * @param visMatricule identifiant
-     * @return objet Adresse
-     * @throws SQLException
-     */
-    public static String selectNomLabByCode(String codeLab) throws SQLException {
-        String nomLab = null;
-        ResultSet rs;
-        PreparedStatement pstmt;
-        Jdbc jdbc = Jdbc.getInstance();
-        String requete = "SELECT LAB_NOM FROM SECTEUR WHERE LAB_CODE = ?";
-        pstmt = jdbc.getConnexion().prepareStatement(requete);
-        pstmt.setString(1, codeLab);
-        rs = pstmt.executeQuery();
-        if (rs.next()) {
-            nomLab = rs.getString("LAB_NOM");
-        }
-        return nomLab;
-    }
+//    /**
+//     * Extraction d'une adresse, sur son identifiant
+//     *
+//     * @param visMatricule identifiant
+//     * @return objet Adresse
+//     * @throws SQLException
+//     */
+//    public static String selectNomLabByCode(String codeLab) throws SQLException {
+//        String nomLab = null;
+//        ResultSet rs;
+//        PreparedStatement pstmt;
+//        Jdbc jdbc = Jdbc.getInstance();
+//        String requete = "SELECT LAB_NOM FROM LABO WHERE LAB_CODE = ?";
+//        pstmt = jdbc.getConnexion().prepareStatement(requete);
+//        pstmt.setString(1, codeLab);
+//        rs = pstmt.executeQuery();
+//        if (rs.next()) {
+//            nomLab = rs.getString("LAB_NOM");
+//        }
+//        return nomLab;
+//    }
 
     public static Labo selectLabByCode(String codeLab) throws SQLException {
         Labo unLabo = null;

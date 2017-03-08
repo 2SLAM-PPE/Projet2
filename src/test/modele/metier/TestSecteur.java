@@ -16,24 +16,13 @@ import modele.metier.Secteur;
 public class TestSecteur {
 
     public static void main(String[] args) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        Visiteur vis;
-        Labo lab;
         Secteur sec;
-        vis = null;
         System.out.println("\nTest n°1 : instanciation et accesseurs");
-        try {
-            lab = new Labo( "TE","secteurTEST","chefTEST");
-            sec = new Secteur( "NW","Nord Ouest");
-            vis = new Visiteur("a17", "Andre", "David", "1 r Aimon de Chissée", "38100", "Grenoble", sdf.parse("15/04/20014"), sec, lab);
-        } catch (ParseException ex) {
-            Logger.getLogger(TestSecteur.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        System.out.println(vis);
+        sec = new Secteur("codeTEST", "secteurTEST");
+        System.out.println(sec);
         System.out.println("\nTest n°2 : mutateurs");
-        vis.setAdresse("56 boulevard de la Prairie aux Ducs");
-        vis.setCp("44265");
-        vis.setVille("Nantes");
-        System.out.println(vis);
+        sec.setCodeSec("codeTEST2");
+        sec.setLibSec("labTEST2");
+        System.out.println(sec);
     }
 }
