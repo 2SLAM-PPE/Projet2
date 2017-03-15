@@ -112,10 +112,7 @@ public class CtrlLesVisiteurs implements WindowListener, ActionListener {
     /**
      * Quitter l'application, après demande de confirmation
      */
-    private void quitter() {
-        this.getVue().setVisible(false);
-        ctrlPrincipal.afficherMenuGeneral();
-    }
+    
 
     // ACCESSEURS et MUTATEURS
     public VueLesVisiteurs getVue() {
@@ -133,7 +130,7 @@ public class CtrlLesVisiteurs implements WindowListener, ActionListener {
 
     @Override
     public void windowClosing(WindowEvent e) {
-        quitter();
+        ctrlPrincipal.quitterFenetre(vue);
     }
 
     @Override
@@ -166,7 +163,7 @@ public class CtrlLesVisiteurs implements WindowListener, ActionListener {
             leVisiteur = 0;
             afficherUnVisiteur(lesVisiteurs, (this.vue.getjComboBoxVisiteurChercher().getSelectedIndex()));
         } else if (e.getSource().equals(vue.getjButtonVisiteurFermer())) {
-            this.quitter();
+            ctrlPrincipal.quitterFenetre(vue);
         }
     }
 

@@ -60,5 +60,9 @@ public class CtrlPrincipal {
     private void setCurrentView(VueLesVisiteurs vue) {
         this.currentView = vue;
     }
+    public void quitterFenetre(JFrame laVue) {
+        laVue.setVisible(false);
+        this.afficherMenuGeneral();
+    }
 
 }
