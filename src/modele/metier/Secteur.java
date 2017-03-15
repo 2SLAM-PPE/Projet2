@@ -3,7 +3,7 @@ package modele.metier;
 import java.util.Date;
 
 /**
- * Classe représentant les visiteurs medicaux de GSB
+ * Classe représentant les secteurs de GSB
  *
  * @author btssio
  * @version 1.0 :

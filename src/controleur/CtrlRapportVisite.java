@@ -17,8 +17,8 @@ import modele.metier.Secteur;
 import modele.metier.Visiteur;
 
 /**
- * @author nbourgeois
- * @version octobre 2014 - révision octobre 2016 : vue passive
+ * @author llusson
+ * @version mars 2017
  */
 public class CtrlRapportVisite implements WindowListener, ActionListener {
 
@@ -36,6 +36,7 @@ public class CtrlRapportVisite implements WindowListener, ActionListener {
         this.vue.getjButtonNouveau().addActionListener(this);
         this.vue.getjButtonFermer().addActionListener(this);
         // préparer l'état initial de la vue
+        
     }
 
     // contrôle de la vue
