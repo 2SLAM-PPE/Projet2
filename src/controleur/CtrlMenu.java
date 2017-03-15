@@ -32,6 +32,7 @@ public class CtrlMenu implements WindowListener, ActionListener {
         this.vue.addWindowListener(this);
         this.vue.getjButtonVisiteurs().addActionListener(this);
         this.vue.getjButtonMeds().addActionListener(this);
+        this.vue.getjButtonCR().addActionListener(this);
         this.vue.getjButtonPracticiens().addActionListener(this);
         this.vue.getjButtonQuitter().addActionListener(this);
         // préparer l'état initial de la vue
@@ -91,6 +92,8 @@ public class CtrlMenu implements WindowListener, ActionListener {
             ctrlPrincipal.afficherLesVisiteurs();
         } else if (e.getSource().equals(vue.getjButtonMeds())) {
         } else if (e.getSource().equals(vue.getjButtonPracticiens())) {
+        } else if (e.getSource().equals(vue.getjButtonCR())){
+            ctrlPrincipal.afficherLesRapports();
         } else if (e.getSource().equals(vue.getjButtonQuitter())) {
             this.quitter();
         }

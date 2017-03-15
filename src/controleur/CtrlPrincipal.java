@@ -1,12 +1,14 @@
 package controleur;
 
 import GUI.VueLesVisiteurs;
+import GUI.VueRapportVisite;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 public class CtrlPrincipal {
 
     CtrlLesVisiteurs ctrlLesVisiteurs;
+    CtrlRapportVisite ctrlLesRapports;
     CtrlMenu ctrlMenu;
     CtrlConnexion ControleurConnexion;
     JFrame currentView;
@@ -21,6 +23,16 @@ public class CtrlPrincipal {
         }
         this.ctrlLesVisiteurs.getVue().setVisible(true);
         setCurrentView(this.ctrlLesVisiteurs.getVue());
+    }
+    public void afficherLesRapports() {
+        this.ctrlMenu.getVue().setVisible(false);
+        if (ctrlLesRapports == null) {
+            VueRapportVisite laVueLesRapports = new VueRapportVisite();
+            CtrlRapportVisite leControleurLesRapports = new CtrlRapportVisite(laVueLesRapports, this);
+            this.setCtrlRapportVisite(leControleurLesRapports);
+        }
+        this.ctrlLesRapports.getVue().setVisible(true);
+        setCurrentView(this.ctrlLesRapports.getVue());
     }
 
     public void afficherLesPraticiens() {
@@ -48,6 +60,13 @@ public class CtrlPrincipal {
     public void setCtrlLesVisiteurs(CtrlLesVisiteurs ctrlLesVisiteurs) {
         this.ctrlLesVisiteurs = ctrlLesVisiteurs;
     }
+    public CtrlRapportVisite getCtrlRapportVisite() {
+        return ctrlLesRapports;
+    }
+
+    public void setCtrlRapportVisite(CtrlRapportVisite ctrlLesRapports) {
+        this.ctrlLesRapports = ctrlLesRapports;
+    }
 
     public CtrlLesVisiteurs getCtrlMenu() {
         return ctrlLesVisiteurs;
@@ -57,7 +76,7 @@ public class CtrlPrincipal {
         this.ctrlMenu = ctrlMenu;
     }
 
-    private void setCurrentView(VueLesVisiteurs vue) {
+    private void setCurrentView(JFrame vue) {
         this.currentView = vue;
     }
     public void quitterFenetre(JFrame laVue) {
