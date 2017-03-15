@@ -64,5 +64,23 @@ public class DaoRapport {
         }
         return lesRapports;
     }
-//    
+
+    public static void addRapport(String matriculeVisiteur, int numeroRapport, int numeroPraticien, Date dateRapport, String bilanRapport, String motifRapport) throws SQLException {
+        ResultSet rs;
+        PreparedStatement pstmt;
+        Jdbc jdbc = Jdbc.getInstance();
+        //préparer la requête
+        String requete = "INSERT INTO RAPPORT_VISITE VALUES (?, ?, ?, ?, ?, ?)";
+        pstmt = jdbc.getConnexion().prepareStatement(requete);
+        pstmt.setString(1, matriculeVisiteur);
+        pstmt.setInt(2, numeroRapport);
+        pstmt.setInt(3, numeroPraticien);
+        pstmt.setDate(4, (java.sql.Date) dateRapport);
+        pstmt.setString(5, bilanRapport);
+        pstmt.setString(6, motifRapport);
+        rs = pstmt.executeQuery();
+        
+
+    }
+
 }

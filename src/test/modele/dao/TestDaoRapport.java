@@ -1,12 +1,16 @@
 package test.modele.dao;
 
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
-import modele.dao.DaoLabo;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.text.Position;
 import modele.dao.DaoRapport;
 import modele.dao.Jdbc;
-import modele.metier.Labo;
 import modele.metier.Rapport;
+import test.modele.metier.TestVisiteur;
 
 /**
  *
@@ -19,12 +23,27 @@ public class TestDaoRapport {
         java.sql.Connection cnx = null;
 
         try {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            java.sql.Date dateRap = null;
+            String matricule = "a131";
+            int numRap = 10;
+            int numPrat = 23;
+            try {
+                java.util.Date utilStartDate = sdf.parse("15/12/1993");
+                dateRap = new java.sql.Date(utilStartDate.getTime());
+            } catch (ParseException ex) {
+                Logger.getLogger(TestVisiteur.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            String bilan = "bilan";
+            String motif = "motif";
             test0_Connexion();
             System.out.println("Test0 effectué : connexion\n");
             test1_SelectUnique(3);
             System.out.println("Test1 effectué : sélection unique (Rapport via numéro)\n");
-            test3_SelectMultiple();
+            test2_SelectMultiple();
             System.out.println("Test2 effectué : sélection multiple \n");
+            test3_AjoutRapport(matricule, numRap, numPrat, dateRap, bilan, motif);
+            System.out.println("Test3 effectué : ajout d'un rapport \n");
         } catch (ClassNotFoundException e) {
             System.err.println("Erreur de pilote JDBC : " + e);
         } catch (SQLException e) {
@@ -62,7 +81,7 @@ public class TestDaoRapport {
      */
     public static void test1_SelectUnique(int numRapport) throws SQLException {
         Rapport ceRapport = DaoRapport.selectRapportByNum(numRapport);
-        System.out.println("Labo de matricule : " + numRapport + " : " + ceRapport.toString());
+        System.out.println("Rapport de numéro : " + numRapport + " : " + ceRapport.toString());
     }
 
     /**
@@ -70,9 +89,14 @@ public class TestDaoRapport {
      *
      * @throws SQLException
      */
-    public static void test3_SelectMultiple() throws SQLException {
+    public static void test2_SelectMultiple() throws SQLException {
         List<Rapport> cesRapports = DaoRapport.selectAll();
-        System.out.println("Liste des laboratoires : " + cesRapports);
+        System.out.println("Liste des Rapports : " + cesRapports);
+    }
+
+    public static void test3_AjoutRapport(String matriculeVisiteur, int numeroRapport, int numeroPraticien, java.util.Date dateRapport, String bilanRapport, String motifRapport) throws SQLException {
+        DaoRapport.addRapport(matriculeVisiteur, numeroRapport, numeroPraticien, dateRapport, bilanRapport, motifRapport);
+
     }
 
 }
