@@ -1,6 +1,7 @@
 package test.modele.dao;
 
 import java.sql.*;
+import java.util.List;
 import modele.dao.DaoVisiteur;
 import modele.dao.Jdbc;
 import modele.metier.Visiteur;
@@ -20,6 +21,8 @@ public class TestDaoVisiteur {
             System.out.println("Test0 effectué : connexion\n");
             test1_SelectUnique("a17");
             System.out.println("Test1 effectué : sélection unique\n");
+            test2_SelectMultiple();
+            System.out.println("Test2 effectué : sélection multiple\n");
         } catch (ClassNotFoundException e) {
             System.err.println("Erreur de pilote JDBC : " + e);
         } catch (SQLException e) {
@@ -58,6 +61,15 @@ public class TestDaoVisiteur {
     public static void test1_SelectUnique(String visMatricule) throws SQLException {
         Visiteur ceVisiteur = DaoVisiteur.selectOne(visMatricule);
         System.out.println("Visiteur de matricule : "+ visMatricule +" : "+ceVisiteur.toString());
+    }
+    /**
+     * Affiche tous les visiteurs
+     *
+     * @throws SQLException
+     */
+    public static void test2_SelectMultiple() throws SQLException {
+        List<Visiteur> cesVisiteurs = DaoVisiteur.selectAll();
+        System.out.println("Visiteurs : "+cesVisiteurs.toString());
     }
 
 }

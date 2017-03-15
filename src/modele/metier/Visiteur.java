@@ -136,7 +136,11 @@ public class Visiteur {
      */
     @Override
     public String toString() {
-        return ("Visiteur{matricule: " + this.getMatricule() + "\tnom: " + this.getNom() + "\tprenom: " + this.getPrenom()+ "\tadresse: " + this.getAdresse()+ "\tcp: " + this.getCp()+ "\tville: " + this.getVille()+ "\tdate d'embauche: " + this.getDateEmbauche()+ "\tcode section: " + this.getSecteur().getCodeSec()+ "\tcode labo: " + this.getLabo().getCodeLab()) + "}";
+        String codeSecteur = null;
+        if (this.getSecteur()!=null){
+            codeSecteur = this.getSecteur().getCodeSec();
+        }
+        return ("Visiteur{matricule: " + this.getMatricule() + "\tnom: " + this.getNom() + "\tprenom: " + this.getPrenom()+ "\tadresse: " + this.getAdresse()+ "\tcp: " + this.getCp()+ "\tville: " + this.getVille()+ "\tdate d'embauche: " + this.getDateEmbauche()+ "\tcode secteur: " + codeSecteur+ "\tcode labo: " + this.getLabo().getCodeLab()) + "}";
     }
 
 }
