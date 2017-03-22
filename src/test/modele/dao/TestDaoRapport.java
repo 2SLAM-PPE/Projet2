@@ -94,7 +94,7 @@ public class TestDaoRapport {
         System.out.println("Liste des Rapports : " + cesRapports);
     }
 
-    public static void test3_AjoutRapport(String matriculeVisiteur, int numeroRapport, int numeroPraticien, java.util.Date dateRapport, String bilanRapport, String motifRapport) throws SQLException {
+    public static void test3_AjoutRapport(String matriculeVisiteur, int numeroRapport, int numeroPraticien, java.sql.Date dateRapport, String bilanRapport, String motifRapport) throws SQLException {
         DaoRapport.addRapport(matriculeVisiteur, numeroRapport, numeroPraticien, dateRapport, bilanRapport, motifRapport);
 
     }

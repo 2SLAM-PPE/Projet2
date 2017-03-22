@@ -10,7 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 import modele.metier.Rapport;
 
@@ -65,7 +65,7 @@ public class DaoRapport {
         return lesRapports;
     }
 
-    public static void addRapport(String matriculeVisiteur, int numeroRapport, int numeroPraticien, Date dateRapport, String bilanRapport, String motifRapport) throws SQLException {
+    public static void addRapport(String matriculeVisiteur, int numeroRapport, int numeroPraticien, java.sql.Date dateRapport, String bilanRapport, String motifRapport) throws SQLException {
         ResultSet rs;
         PreparedStatement pstmt;
         Jdbc jdbc = Jdbc.getInstance();
@@ -75,7 +75,7 @@ public class DaoRapport {
         pstmt.setString(1, matriculeVisiteur);
         pstmt.setInt(2, numeroRapport);
         pstmt.setInt(3, numeroPraticien);
-        pstmt.setDate(4, (java.sql.Date) dateRapport);
+        pstmt.setDate(4, dateRapport);
         pstmt.setString(5, bilanRapport);
         pstmt.setString(6, motifRapport);
         rs = pstmt.executeQuery();

@@ -1,6 +1,6 @@
 package modele.metier;
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
  * Classe représentant les rapports de visite

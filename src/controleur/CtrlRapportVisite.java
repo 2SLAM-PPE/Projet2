@@ -1,6 +1,5 @@
 package controleur;
 
-import GUI.VueMenu;
 import GUI.VueRapportVisite;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,19 +7,13 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.sql.SQLException;
 import java.util.Calendar;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
-import modele.dao.DaoVisiteur;
-import modele.dao.DaoLabo;
 import modele.dao.DaoPraticien;
 import modele.dao.DaoRapport;
-import modele.dao.DaoSecteur;
-import modele.metier.Labo;
 import modele.metier.Praticien;
 import modele.metier.Rapport;
-import modele.metier.Secteur;
-import modele.metier.Visiteur;
 
 /**
  * @author llusson
@@ -33,20 +26,12 @@ public class CtrlRapportVisite implements WindowListener, ActionListener {
     private int leRapport = 0;
     private List<Praticien> lesPraticiens;
     private List<Rapport> lesRapports;
+    private boolean editMode = false;
 
     public CtrlRapportVisite(VueRapportVisite vue, CtrlPrincipal ctrl) {
         this.vue = vue;
         this.ctrlPrincipal = ctrl;
-        try {
-            lesRapports = DaoRapport.selectAll();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(getVue(), "CtrlLesVisiteurs - échec de sélection des visiteurs");
-        }
-        try {
-            lesPraticiens = DaoPraticien.selectAll();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(getVue(), "CtrlLesVisiteurs - échec de sélection des visiteurs");
-        }
+
         // le contrôleur écoute la vue
         this.vue.addWindowListener(this);
         this.vue.getjButtonPrecedent().addActionListener(this);
@@ -55,9 +40,6 @@ public class CtrlRapportVisite implements WindowListener, ActionListener {
         this.vue.getjButtonFermer().addActionListener(this);
         // préparer l'état initial de la vue
 
-        for (Praticien ptc : lesPraticiens) {
-            this.vue.getjComboBoxPraticiens().addItem(ptc.getNomPraticien() + " " + ptc.getPrenomPraticien());
-        }
         rechercherPremier();
     }
 
@@ -70,19 +52,40 @@ public class CtrlRapportVisite implements WindowListener, ActionListener {
     // contrôle de la vue
     private final void afficherUnRapport(List<Rapport> desRapports, int x) {
         Rapport unRapport = desRapports.get(leRapport + x);
-        //for (Visiteur unVisiteur : desVisiteurs) {
+
         getVue().getjTextFieldNumRapport().setText(unRapport.getNumeroRapport() + "");
         getVue().getjComboBoxPraticiens().setSelectedIndex(unRapport.getNumeroPraticien());
         getVue().getjTextFieldBilan().setText(unRapport.getBilanRapport());
         getVue().getjTextFieldMotif().setText(unRapport.getMotifRapport());
-        getVue().getDateChooserComboBox().setCurrent(toCalendar(unRapport.getDateRapport()));
-        //}   
+        getVue().getDateChooserComboBox().setSelectedDate(toCalendar(unRapport.getDateRapport()));
+
         leRapport = (leRapport + x);
     }
 
     private void rechercherPremier() {
+        try {
+            lesRapports = DaoRapport.selectAll();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(getVue(), "CtrlLesVisiteurs - échec de sélection des visiteurs");
+        }
+        try {
+            lesPraticiens = DaoPraticien.selectAll();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(getVue(), "CtrlLesVisiteurs - échec de sélection des visiteurs");
+        }
+        for (Praticien ptc : lesPraticiens) {
+            this.vue.getjComboBoxPraticiens().addItem(ptc.getNomPraticien() + " " + ptc.getPrenomPraticien());
+        }
         leRapport = 0;
         afficherUnRapport(lesRapports, 0);
+    }
+
+    private void formulaire() {
+        getVue().getjTextFieldNumRapport().setText("");
+        getVue().getjComboBoxPraticiens().setSelectedIndex(-1);
+        getVue().getjTextFieldBilan().setText("");
+        getVue().getjTextFieldMotif().setText("");
+        getVue().getDateChooserComboBox().setSelectedDate(null);
     }
 
     /**
@@ -134,11 +137,48 @@ public class CtrlRapportVisite implements WindowListener, ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(vue.getjButtonPrecedent())) {
-            afficherUnRapport(lesRapports, -1);
+            if (editMode) {
+                int rep = JOptionPane.showConfirmDialog(null, "Le formulaire n'a pas été enregistré \n Quitter malgré tout? ?", "Formulaire", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (rep == JOptionPane.YES_OPTION) {
+                    editMode = false;
+                    afficherUnRapport(lesRapports, -1);
+                }
+            } else {
+                afficherUnRapport(lesRapports, -1);
+            }
         } else if (e.getSource().equals(vue.getjButtonSuivant())) {
-            afficherUnRapport(lesRapports, 1);
+            if (editMode) {
+                int rep = JOptionPane.showConfirmDialog(null, "Le formulaire n'a pas été enregistré \n Quitter malgré tout ?", "Formulaire", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (rep == JOptionPane.YES_OPTION) {
+                    editMode = false;
+                    afficherUnRapport(lesRapports, 1);
+                }
+            } else {
+                afficherUnRapport(lesRapports, 1);
+            }
         } else if (e.getSource().equals(vue.getjButtonNouveau())) {
-
+            if (editMode) {
+                int numPrat = vue.getjComboBoxPraticiens().getSelectedIndex();
+                java.sql.Date dateRapport = new Date(vue.getDateChooserComboBox().getSelectedDate().getTimeInMillis());
+               
+                String bilanRapport = vue.getjTextFieldBilan().getText();
+                String motifRapport = vue.getjTextFieldMotif().getText();
+                //ici le matricule est d'office regle sur "zzz" car la page de connexion n'est pas faite
+                //le numero de rapport n'est pas editable car auto incremente
+                System.out.println("\"zzz\", 10, " + numPrat + "," + dateRapport + "," + bilanRapport + "," + motifRapport);
+                try {
+                    DaoRapport.addRapport("zzz", 10, numPrat, dateRapport, bilanRapport, motifRapport);
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(getVue(), "Echec de l'ajout du rapport");
+                }
+                editMode = false;
+                vue.getjButtonNouveau().setText("Nouveau");
+                rechercherPremier();
+            } else {
+                editMode = true;
+                vue.getjButtonNouveau().setText("Enregistrer");
+                formulaire();
+            }
         } else if (e.getSource().equals(vue.getjButtonFermer())) {
             ctrlPrincipal.quitterFenetre(vue);
         }
