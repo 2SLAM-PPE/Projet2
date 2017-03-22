@@ -73,8 +73,10 @@ public class CtrlRapportVisite implements WindowListener, ActionListener {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(getVue(), "CtrlLesVisiteurs - échec de sélection des visiteurs");
         }
+        this.vue.getjComboBoxPraticiens().addItem("Sélectionnez un praticien");
         for (Praticien ptc : lesPraticiens) {
             this.vue.getjComboBoxPraticiens().addItem(ptc.getNomPraticien() + " " + ptc.getPrenomPraticien());
+
         }
         leRapport = 0;
         afficherUnRapport(lesRapports, 0);
@@ -82,7 +84,7 @@ public class CtrlRapportVisite implements WindowListener, ActionListener {
 
     private void formulaire() {
         getVue().getjTextFieldNumRapport().setText("");
-        getVue().getjComboBoxPraticiens().setSelectedIndex(-1);
+        getVue().getjComboBoxPraticiens().setSelectedIndex(0);
         getVue().getjTextFieldBilan().setText("");
         getVue().getjTextFieldMotif().setText("");
         getVue().getDateChooserComboBox().setSelectedDate(null);
@@ -160,7 +162,7 @@ public class CtrlRapportVisite implements WindowListener, ActionListener {
             if (editMode) {
                 int numPrat = vue.getjComboBoxPraticiens().getSelectedIndex();
                 java.sql.Date dateRapport = new Date(vue.getDateChooserComboBox().getSelectedDate().getTimeInMillis());
-               
+
                 String bilanRapport = vue.getjTextFieldBilan().getText();
                 String motifRapport = vue.getjTextFieldMotif().getText();
                 //ici le matricule est d'office regle sur "zzz" car la page de connexion n'est pas faite
